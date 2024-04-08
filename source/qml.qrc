@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ScaleFactor.js</file>
+        <file>qml/HomePage.qml</file>
+        <file>qml/BinaryToASCII.qml</file>
+        <file>qml/BinaryToHex.qml</file>
+    </qresource>
+</RCC>
