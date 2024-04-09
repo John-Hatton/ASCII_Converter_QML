@@ -14,7 +14,7 @@ Item {
         spacing: 10 // Adjust spacing between buttons if needed
 
         Button {
-            id: BinaryToASCII
+            id: binaryToASCII
             text: "Binary to ASCII"
             font.pointSize: 12
             Layout.minimumWidth: 200 // Set the minimum width of the button

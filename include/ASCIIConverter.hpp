@@ -26,15 +26,23 @@ public:
     void setHexValue(QString value);
 
 signals:
-    void valueConvertedFromBinaryToASCII(QString binaryValue);
-    void valueConvertedFromBinaryToHex(QString Binary);
+    void valueConvertedFromBinaryToASCII(int ASCII);
+    void valueConvertedFromBinaryToHex(QString Hex);
+    void valueConvertedFromASCIIToBinary(QString Binary);
+    void valueConvertedFromASCIIToHex(QString Hex);
+    void valueConvertedFromHexToASCII(int ASCII);
+    void valueConvertedFromHexToBinary(QString Binary);
     void binaryValueChanged();
     void hexValueChanged();
     void asciiValueChanged();
 
 public slots:
-    void convertValueFromBinaryToASCII(const QString &binaryValue);
-    void convertValueFromBinaryToHex(const QString &binaryValue);
+    void convertValueFromBinaryToASCII(const QString& binaryValue);
+    void convertValueFromBinaryToHex(const QString& binaryValue);
+    void convertValueFromASCIIToBinary(const int asciiValue);
+    void convertValueFromASCIIToHex(const int asciiValue);
+    void convertValueFromHexToASCII(const QString& hexValue);
+    void convertValueFromHexToBinary(const QString& hexValue);
 
 
 private:
