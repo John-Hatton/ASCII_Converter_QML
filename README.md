@@ -4,18 +4,7 @@
 
 ### Introduction
 
-
----
-
-### Note on Qt6Cored.dll
-
-I've included GTest in this build if for nothing more than to see if it's possible to test with GTest using QT. I was 
-able to get things working, after adding the moc lines in test/CMakeLists.txt, but I was unable to get it working beyond 
-that without copying over the Qt6Cored.dll file to the directory where the Test executable was located. 
-
-I.e.:
-
-    ..\ASCII_Converter_QML\cmake-build-debug-visual-studio-2019\test\Debug
+I was scrolling on Facebook again, and saw some post that had a byte in binary that I wanted to convert. I recently worked on a temperature converter project in QML, and this seemed super similar in nature, so I basically copied that program and here we are. 
 
 ---
 
