@@ -7,7 +7,7 @@ Item {
 
     Text {
         id: inputTextName
-        text: "      Starting Value in Binary:"
+        text: "      Starting Value in Hex:"
         font.pointSize: 18
         anchors.top: parent.top
         color: "#FFFFFF"
@@ -24,8 +24,8 @@ Item {
         height: 50 // Adjust height as needed
         anchors.top: inputTextName.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        placeholderText: "Enter Binary Value: "
-        validator: RegularExpressionValidator { regularExpression: /^[01]+$/ }
+        placeholderText: "Enter Hex Value: "
+        validator: RegularExpressionValidator { regularExpression: /^[0-9A-Fa-f]+$/ }
         wrapMode: TextArea.NoWrap // Disable wrapping
     }
 
@@ -38,8 +38,8 @@ Item {
         anchors.top: inputField.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
-            // Emit signal to notify C++ side to convert value
-            asciiConverter.convertValueFromBinaryToHex(inputField.text)
+            // Emit signal to notify C++ side to convert temperature
+            asciiConverter.convertValueFromHexToBinary(inputField.text)
         }
     }
 
@@ -69,8 +69,8 @@ Item {
 
     Connections {
         target: asciiConverter
-        function onValueConvertedFromBinaryToHex(HexValue) {
-            resultText.text = "Result: 0x" + HexValue
+        function onValueConvertedFromHexToBinary(Binary) {
+            resultText.text = "Result: " + Binary
         }
     }
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "Converter.js" as Converter
 
 Item {
     width: 400
@@ -25,7 +26,7 @@ Item {
         anchors.top: inputTextName.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         placeholderText: "Enter Binary Value: "
-        //validator: StringValidator {} // Such a thing?
+        validator: RegularExpressionValidator { regularExpression: /^[01]+$/ }
         wrapMode: TextArea.NoWrap // Disable wrapping
     }
 
@@ -38,7 +39,7 @@ Item {
         anchors.top: inputField.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
-            // Emit signal to notify C++ side to convert temperature
+            // Emit signal to notify C++ side to convert value
             asciiConverter.convertValueFromBinaryToASCII(inputField.text)
         }
     }
@@ -47,6 +48,15 @@ Item {
         id: resultText
         text: ""
         anchors.top: convertButton.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "#FFFFFF"
+        font.pointSize: 18
+        bottomPadding: 10
+    }
+    Text {
+        id: resultTextASCII
+        text: ""
+        anchors.top: resultText.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         color: "#FFFFFF"
         font.pointSize: 18
@@ -62,7 +72,7 @@ Item {
             mainWindow.loadPage("qml/HomePage.qml"); // Load the HomePage.qml page
         }
         anchors {
-            top: resultText.bottom
+            top: resultTextASCII.bottom
             horizontalCenter: parent.horizontalCenter
         }
     }
@@ -70,9 +80,8 @@ Item {
     Connections {
         target: asciiConverter
         function onValueConvertedFromBinaryToASCII(ASCIIValue) {
-            // Update the displayed Celsius temperature
-            console.log(ASCIIValue);
-            resultText.text = "Result: " + ASCIIValue
+            resultText.text = "Result (int): " + ASCIIValue
+            resultTextASCII.text = "In ASCII:  '" + Converter.IntToASCII(ASCIIValue) + "'";
         }
     }
 }

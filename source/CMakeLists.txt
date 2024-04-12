@@ -3,6 +3,7 @@ add_executable(${PROJECT_NAME}
         ASCIIConverter.cpp
         ../include/ASCIIConverter.hpp # Need for Q_OBJECT
         qml.qrc
+        qml/ASCIIToBinary.qml
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

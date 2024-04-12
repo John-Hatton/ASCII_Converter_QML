@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <utility>
+#include <QDebug>
 
 ASCIIConverter::ASCIIConverter(QObject *parent) : QObject(parent)
 {
@@ -73,21 +74,53 @@ void ASCIIConverter::convertValueFromBinaryToHex(const QString &binaryValue) {
     emit valueConvertedFromBinaryToHex(result.toUpper());
 }
 
+//void ASCIIConverter::convertValueFromASCIIToBinary(const int asciiValue) {
+//    QString binaryString;
+//
+//    // Loop to generate the binary representation of num
+//    for (int i = 7; i >= 0; --i) {
+//        // Shift the bits of num to the right by i positions
+//        // and perform bitwise AND with 1 to get the least significant bit
+//        int bit = (asciiValue >> i) & 1;
+//        // Append the binary digit to the string
+//        binaryString.append(QString::number(bit));
+//    }
+//
+//    BinaryValue_ = binaryString;
+//    emit valueConvertedFromASCIIToBinary(binaryString);
+//}
+
 void ASCIIConverter::convertValueFromASCIIToBinary(const int asciiValue) {
     QString binaryString;
 
-    // Loop to generate the binary representation of num
-    for (int i = 7; i >= 0; --i) {
-        // Shift the bits of num to the right by i positions
-        // and perform bitwise AND with 1 to get the least significant bit
-        int bit = (asciiValue >> i) & 1;
-        // Append the binary digit to the string
-        binaryString.append(QString::number(bit));
+    // Check if asciiValue is within the range [0, 255]
+    if (asciiValue >= 0 && asciiValue <= 255) {
+        // For values within the range [0, 255], convert them to 8-bit binary strings
+        for (int i = 7; i >= 0; --i) {
+            int bit = (asciiValue >> i) & 1;
+            binaryString.append(QString::number(bit));
+        }
+    } else {
+        // For values outside the range [0, 255], convert them to binary strings with variable length
+        int numBits = 0;
+        int temp = asciiValue;
+        while (temp > 0) {
+            temp >>= 1;
+            ++numBits;
+        }
+        if (numBits == 0) numBits = 1;
+
+        for (int i = numBits - 1; i >= 0; --i) {
+            int bit = (asciiValue >> i) & 1;
+            binaryString.append(QString::number(bit));
+        }
     }
 
     BinaryValue_ = binaryString;
     emit valueConvertedFromASCIIToBinary(binaryString);
 }
+
+
 
 void ASCIIConverter::convertValueFromASCIIToHex(const int asciiValue) {
     std::stringstream stream;
@@ -104,19 +137,57 @@ void ASCIIConverter::convertValueFromHexToASCII(const QString &hexValue) {
     emit valueConvertedFromHexToASCII(result);
 }
 
+//void ASCIIConverter::convertValueFromHexToBinary(const QString &hexValue) {
+//    // Convert hex QString to integer
+//    int intValue = hexValue.toInt(nullptr, 16);
+//
+//    // Convert integer to binary QString
+//    QString binaryString;
+//    for (int i = 7; i >= 0; --i) {
+//        int bit = (intValue >> i) & 1;
+//        binaryString.append(QString::number(bit));
+//    }
+//
+//    BinaryValue_ = binaryString;
+//    emit valueConvertedFromHexToBinary(binaryString);
+//}
+
 void ASCIIConverter::convertValueFromHexToBinary(const QString &hexValue) {
     // Convert hex QString to integer
-    int intValue = hexValue.toInt(nullptr, 16);
+    bool ok;
+    int intValue = hexValue.toInt(&ok, 16);
 
-    // Convert integer to binary QString
+    // Check if conversion to integer was successful
+    if (!ok) {
+        qDebug() << "Invalid hexadecimal value!";
+        return;
+    }
+
     QString binaryString;
-    for (int i = 7; i >= 0; --i) {
-        int bit = (intValue >> i) & 1;
-        binaryString.append(QString::number(bit));
+
+    // Check if intValue is within the range [0, 255]
+    if (intValue >= 0 && intValue <= 255) {
+        // For values within the range [0, 255], convert them to 8-bit binary strings
+        for (int i = 7; i >= 0; --i) {
+            int bit = (intValue >> i) & 1;
+            binaryString.append(QString::number(bit));
+        }
+    } else {
+        // For values outside the range [0, 255], convert them to binary strings with variable length
+        int numBits = 0;
+        int temp = intValue;
+        while (temp > 0) {
+            temp >>= 1;
+            ++numBits;
+        }
+        if (numBits == 0) numBits = 1;
+
+        for (int i = numBits - 1; i >= 0; --i) {
+            int bit = (intValue >> i) & 1;
+            binaryString.append(QString::number(bit));
+        }
     }
 
     BinaryValue_ = binaryString;
     emit valueConvertedFromHexToBinary(binaryString);
 }
-
-

@@ -40,7 +40,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             // Emit signal to notify C++ side to convert value
-            asciiConverter.convertValueFromASCIIToHex(Converter.ASCIIToInt(inputFieldASCII.text));
+            asciiConverter.convertValueFromASCIIToBinary(Converter.ASCIIToInt(inputFieldASCII.text));
             inputFieldInt.text = Converter.ASCIIToInt(inputFieldASCII.text);
         }
     }
@@ -69,7 +69,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             // Emit signal to notify C++ side to convert value
-            asciiConverter.convertValueFromASCIIToHex(inputFieldInt.text);
+            asciiConverter.convertValueFromASCIIToBinary(inputFieldInt.text);
             inputFieldASCII.text = Converter.IntToASCII(parseInt(inputFieldInt.text));
         }
     }
@@ -100,8 +100,8 @@ Item {
 
     Connections {
         target: asciiConverter
-        function onValueConvertedFromASCIIToHex(HexValue) {
-            resultText.text = "Result: 0x" + HexValue
+        function onValueConvertedFromASCIIToBinary(BinaryValue) {
+            resultText.text = "Result: " + BinaryValue
         }
     }
-} 
+}

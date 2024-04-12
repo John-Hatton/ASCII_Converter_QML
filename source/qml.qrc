@@ -3,8 +3,13 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ScaleFactor.js</file>
+        <file>qml/Converter.js</file>
         <file>qml/HomePage.qml</file>
+        <file>qml/ASCIIToBinary.qml</file>
+        <file>qml/ASCIIToHex.qml</file>
         <file>qml/BinaryToASCII.qml</file>
         <file>qml/BinaryToHex.qml</file>
+        <file>qml/HexToASCII.qml</file>
+        <file>qml/HexToBinary.qml</file>
     </qresource>
 </RCC>
