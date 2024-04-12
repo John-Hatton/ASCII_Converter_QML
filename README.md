@@ -15,3 +15,6 @@ See my original project [Temperature Converter](https://github.com/inversederiva
 
 ---
 
+### See Android APK in Releases
+
+I've compiled this app with Qt Creator, and uploaded the APK.
