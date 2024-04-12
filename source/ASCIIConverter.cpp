@@ -74,22 +74,6 @@ void ASCIIConverter::convertValueFromBinaryToHex(const QString &binaryValue) {
     emit valueConvertedFromBinaryToHex(result.toUpper());
 }
 
-//void ASCIIConverter::convertValueFromASCIIToBinary(const int asciiValue) {
-//    QString binaryString;
-//
-//    // Loop to generate the binary representation of num
-//    for (int i = 7; i >= 0; --i) {
-//        // Shift the bits of num to the right by i positions
-//        // and perform bitwise AND with 1 to get the least significant bit
-//        int bit = (asciiValue >> i) & 1;
-//        // Append the binary digit to the string
-//        binaryString.append(QString::number(bit));
-//    }
-//
-//    BinaryValue_ = binaryString;
-//    emit valueConvertedFromASCIIToBinary(binaryString);
-//}
-
 void ASCIIConverter::convertValueFromASCIIToBinary(const int asciiValue) {
     QString binaryString;
 
@@ -120,8 +104,6 @@ void ASCIIConverter::convertValueFromASCIIToBinary(const int asciiValue) {
     emit valueConvertedFromASCIIToBinary(binaryString);
 }
 
-
-
 void ASCIIConverter::convertValueFromASCIIToHex(const int asciiValue) {
     std::stringstream stream;
     stream << std::hex << asciiValue;
@@ -136,21 +118,6 @@ void ASCIIConverter::convertValueFromHexToASCII(const QString &hexValue) {
     ASCIIValue_ = result;
     emit valueConvertedFromHexToASCII(result);
 }
-
-//void ASCIIConverter::convertValueFromHexToBinary(const QString &hexValue) {
-//    // Convert hex QString to integer
-//    int intValue = hexValue.toInt(nullptr, 16);
-//
-//    // Convert integer to binary QString
-//    QString binaryString;
-//    for (int i = 7; i >= 0; --i) {
-//        int bit = (intValue >> i) & 1;
-//        binaryString.append(QString::number(bit));
-//    }
-//
-//    BinaryValue_ = binaryString;
-//    emit valueConvertedFromHexToBinary(binaryString);
-//}
 
 void ASCIIConverter::convertValueFromHexToBinary(const QString &hexValue) {
     // Convert hex QString to integer
