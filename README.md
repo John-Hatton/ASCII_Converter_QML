@@ -2,7 +2,7 @@
 
 ---
 
-<img src="ASCIIConverter.jpg" alt="ASCII Converter Image">
+<img src="ASCIIConverter.jpg" alt="ASCII Converter Image" width="360" height="800">
 
 
 ### Introduction
